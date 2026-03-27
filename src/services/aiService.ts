@@ -61,7 +61,7 @@ export const aiService = {
     if (!ai) return { text: "No momento o assistente virtual está indisponível.", isHandoff: true, handoffReason: "AI Indisponível" };
 
     try {
-      const prompt = \`[CONTEXTO RECUPERADO DO CATÁLOGO/DOCUMENTO]\n\${ragContext}\n\n[HISTÓRICO DE CONVERSA]\n\${history}\n\n[MENSAGEM ATUAL]\n\${userMessage}\`;
+      const prompt = `[CONTEXTO RECUPERADO DO CATÁLOGO/DOCUMENTO]\n${ragContext}\n\n[HISTÓRICO DE CONVERSA]\n${history}\n\n[MENSAGEM ATUAL]\n${userMessage}`;
 
       let activeSystemPrompt = SYSTEM_PROMPT_B2C;
       if (businessContext === 'B2B') activeSystemPrompt = SYSTEM_PROMPT_B2B;
@@ -104,7 +104,7 @@ export const aiService = {
           return {
             text: "Um momento por favor, repassando todo o escopo de forma organizada com o nosso time para prosseguir o seu atendimento.",
             isHandoff: true,
-            handoffReason: \`[\${args?.motivo_handoff || 'TRANSFER'}] \${args?.dados_levantados || ''}\`
+            handoffReason: `[${args?.motivo_handoff || 'TRANSFER'}] ${args?.dados_levantados || ''}`
           };
         }
       }
@@ -116,7 +116,7 @@ export const aiService = {
       
     } catch (error: any) {
       console.error("Error generating Gemini AI response:", error);
-      throw new Error(\`AI generation failed: \${error.message}\`);
+      throw new Error(`AI generation failed: ${error.message}`);
     }
   }
 };
