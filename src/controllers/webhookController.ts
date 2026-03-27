@@ -28,6 +28,11 @@ export const webhookController = {
       return reply.code(200).send({ status: 'ignored', reason: 'Message is not from customer' });
     }
 
+    // RULE 3: Do not respond if conversation corresponds to a human agent, usually status 'open' or assigned
+    if (event.conversation.status === 'open' || event.conversation.status === 'resolved') {
+      return reply.code(200).send({ status: 'ignored', reason: 'Conversation is open or resolved, human handles this.' });
+    }
+
     console.log(`Received incoming message from conversation ${conversationId}: ${content}`);
 
     try {
@@ -52,6 +57,7 @@ export const webhookController = {
       const messages = historyResponse.payload || [];
       
       const formattedHistory = messages
+        .filter((m: any) => m.id !== event.id) // Exclude the current message from history
         .filter((m: any) => (m.message_type === 0 || m.message_type === 1) && m.content)
         .sort((a: any, b: any) => a.created_at - b.created_at)
         .slice(-10)
