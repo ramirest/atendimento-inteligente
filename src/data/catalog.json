@@ -1,0 +1,30 @@
+[
+  {
+    "id": "box_vidro",
+    "name": "Box de Vidro para Banheiro",
+    "keywords": ["box", "banheiro", "chuveiro", "blindex"],
+    "basePriceInfo": "A partir de R$ 350,00 o metro quadrado (m²).",
+    "rules": "O valor exato depende das medidas, cor do vidro (incolor, fumê, verde) e tipo de acabamento (alumínio padrão ou roldanas aparentes). A instalação está inclusa para a região metropolitana."
+  },
+  {
+    "id": "espelhos",
+    "name": "Espelhos Sob Medida",
+    "keywords": ["espelho", "espelhos", "sala", "quarto", "parede"],
+    "basePriceInfo": "A partir de R$ 280,00 o metro quadrado (m²).",
+    "rules": "Aplica-se a espelhos prata cristais (Cebrace ou Guardian) de 4mm. Acabamento bisotê ou lapidado. Necessário avaliar a parede antes da fixação."
+  },
+  {
+    "id": "envidracamento",
+    "name": "Envidraçamento de Sacadas (Cortina de Vidro)",
+    "keywords": ["sacada", "envidraçamento", "cortina de vidro", "varanda", "fechamento"],
+    "basePriceInfo": "A partir de R$ 650,00 o metro quadrado (m²).",
+    "rules": "Utiliza vidro temperado de 8mm ou 10mm com película de segurança (opcional). O prazo de entrega é de cerca de 15 a 20 dias úteis. Requer aprovação ou padronização do condomínio."
+  },
+  {
+    "id": "jateamento",
+    "name": "Serviços de Jateamento B2B",
+    "keywords": ["jateamento", "b2b", "fosco", "jato", "areia", "personalizado", "empresa", "cnpj", "jatearte"],
+    "basePriceInfo": "Serviços sob consulta e orçamento projetizado. Em média começamos a partir de R$ 80,00 o m² de jateamento simples.",
+    "rules": "Serviço exclusivo para empresas, arquitetos e vidraçarias (Jatearte). Podemos realizar logomarcas, listras e desenhos. O material deve ser enviado para nossa fábrica ou retiramos com frete sob consulta."
+  }
+]
