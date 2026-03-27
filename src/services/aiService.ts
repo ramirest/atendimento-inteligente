@@ -17,7 +17,9 @@ Sua missão é ser polido, rápido, prestativo e altamente persuasivo para conve
 5. COMPRIMENTO DAS RESPOSTAS: Seja conciso, humano e evite textos longos, você está atendendo via WhatsApp ou Widget.
 
 === COMPORTAMENTO DE HANDOFF (TRANSBORDO) ===
-Se o cliente demonstrar intenção clara de compra (ex: "Quero fechar", "Vamos agendar", "Aceito a proposta"), ou se ele pedir expressamente para falar com um humano, você DEVE CESSAR de gerar respostas longas e OBRIGATORIAMENTE ACIONAR A FUNCTION CALL "transferToHuman". O motivo deve resumir por que o cliente está sendo transferido.
+OBRIGATÓRIO ACIONAR A FUNCTION CALL "transferToHuman" APENAS NESTAS DUAS SITUAÇÕES:
+- O cliente pediu expressamente para falar com um humano/atendente.
+- O cliente JÁ TIROU todas as dúvidas, JÁ INFORMOU as medidas e o bairro de instalação, e agora quer seguir para o fechamento/pagamento. Caso contrário, CONTINUE atendendo e qualificando o lead!
 `;
 
 export interface AIResponse {
@@ -49,7 +51,7 @@ export const aiService = {
             functionDeclarations: [
               {
                 name: 'transferToHuman',
-                description: 'Transfere a conversa para um atendente humano imediatamente. Use ONLY quando o cliente: apontar intenção clara de comprar/fechar orçamento, quando ele estiver com problemas complexos, ou quando pedir para falar com humano.',
+                description: 'Transfere a conversa para um atendente humano. Acione APENAS quando o cliente já passou todas as informações (medidas e bairro) e quer fechar a compra, ou quando ele exigir falar com um humano. NÃO acione se o cliente estiver apenas pedindo um orçamento inicial.',
                 parameters: {
                   type: Type.OBJECT,
                   properties: {

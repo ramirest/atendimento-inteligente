@@ -28,9 +28,9 @@ export const webhookController = {
       return reply.code(200).send({ status: 'ignored', reason: 'Message is not from customer' });
     }
 
-    // RULE 3: Do not respond if conversation corresponds to a human agent, usually status 'open' or assigned
-    if (event.conversation.status === 'open' || event.conversation.status === 'resolved') {
-      return reply.code(200).send({ status: 'ignored', reason: 'Conversation is open or resolved, human handles this.' });
+    // RULE 3: Do not respond if conversation is resolved
+    if (event.conversation.status === 'resolved') {
+      return reply.code(200).send({ status: 'ignored', reason: 'Conversation is resolved.' });
     }
 
     console.log(`Received incoming message from conversation ${conversationId}: ${content}`);
