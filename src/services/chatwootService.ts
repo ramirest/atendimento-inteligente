@@ -57,5 +57,18 @@ export const chatwootService = {
       console.error(`Error fetching conversation ${conversationId}:`, error?.response?.data || error.message);
       throw error;
     }
+  },
+
+  /**
+   * Retrieves conversation messages to build conversational memory.
+   */
+  async getConversationMessages(conversationId: number) {
+    try {
+      const response = await api.get(`/conversations/${conversationId}/messages`);
+      return response.data;
+    } catch (error: any) {
+      console.error(`Error fetching messages for conversation ${conversationId}:`, error?.response?.data || error.message);
+      return { payload: [] };
+    }
   }
 };

@@ -30,14 +30,14 @@ export const aiService = {
   /**
    * Generates a response using Gemini, injecting RAG context.
    */
-  async generateResponse(userMessage: string, ragContext: string): Promise<AIResponse> {
+  async generateResponse(userMessage: string, ragContext: string, history: string = ''): Promise<AIResponse> {
     if (!ai) {
       console.warn("Gemini AI API Key not found, returning fallback response.");
       return { text: "No momento o assistente virtual está indisponível.", isHandoff: true, handoffReason: "AI Indisponível" };
     }
 
     try {
-      const prompt = `[CONTEXTO RECUPERADO DO CATÁLOGO]\n${ragContext}\n\n[MENSAGEM DO CLIENTE]\n${userMessage}`;
+      const prompt = `[CONTEXTO RECUPERADO DO CATÁLOGO]\n${ragContext}\n\n[HISTÓRICO DA CONVERSA RECENTE]\n${history}\n\n[MENSAGEM ATUAL DO CLIENTE]\n${userMessage}`;
 
       const response = await ai.models.generateContent({
         model: env.GEMINI_MODEL,

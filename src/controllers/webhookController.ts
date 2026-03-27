@@ -47,8 +47,19 @@ export const webhookController = {
       console.log(`[AI] Retrieving context for conversation ${conversationId}...`);
       const context = ragService.retrieveContext(content);
 
+      console.log(`[AI] Retrieving history for conversation ${conversationId}...`);
+      const historyResponse = await chatwootService.getConversationMessages(conversationId);
+      const messages = historyResponse.payload || [];
+      
+      const formattedHistory = messages
+        .filter((m: any) => (m.message_type === 0 || m.message_type === 1) && m.content)
+        .sort((a: any, b: any) => a.created_at - b.created_at)
+        .slice(-10)
+        .map((m: any) => `${m.message_type === 0 ? "Cliente" : "Atendente"}: ${m.content}`)
+        .join('\n');
+
       console.log(`[AI] Generating response using Gemini for conversation ${conversationId}...`);
-      const aiResponseData = await aiService.generateResponse(content, context);
+      const aiResponseData = await aiService.generateResponse(content, context, formattedHistory);
       
       // Check if Gemini decided to handoff to human
       if (aiResponseData.isHandoff) {
