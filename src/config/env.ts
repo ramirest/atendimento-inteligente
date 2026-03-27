@@ -7,6 +7,7 @@ export const env = {
   CHATWOOT_API_TOKEN: process.env.CHATWOOT_API_TOKEN || '',
   CHATWOOT_ACCOUNT_ID: process.env.CHATWOOT_ACCOUNT_ID || '1',
   GEMINI_API_KEY: process.env.GEMINI_API_KEY || '',
+  GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-3.1-pro-preview',
 };
 
 if (!env.CHATWOOT_URL || !env.CHATWOOT_API_TOKEN) {

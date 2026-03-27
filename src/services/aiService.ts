@@ -40,7 +40,7 @@ export const aiService = {
       const prompt = `[CONTEXTO RECUPERADO DO CATÁLOGO]\n${ragContext}\n\n[MENSAGEM DO CLIENTE]\n${userMessage}`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: env.GEMINI_MODEL,
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_PROMPT,
