@@ -1,34 +1,142 @@
 {
   "B2B": [
     {
-      "id": "jateamento",
-      "name": "Serviços de Jateamento B2B",
-      "keywords": ["jateamento", "b2b", "fosco", "jato", "areia", "personalizado", "empresa", "cnpj", "jateart"],
-      "basePriceInfo": "Serviços sob consulta e orçamento projetizado. Em média começamos a partir de R$ 80,00 o m² de jateamento simples.",
-      "rules": "Serviço exclusivo para empresas, arquitetos e vidraçarias (Jateart). Podemos realizar logomarcas, listras e desenhos. O material deve ser enviado para nossa fábrica ou retiramos com frete sob consulta."
+      "id": "jateamento_espelho",
+      "name": "Jato em espelho (tirar espelhação para luz de LED)",
+      "keywords": ["espelho", "tirar espelhação", "luz de led", "led"],
+      "preco": "R$ 115,00/m²",
+      "regras_de_negocio": "Preço base por metro quadrado.",
+      "restricoes": "Somente serviço de jateamento. Cor a validar por amostra física."
+    },
+    {
+      "id": "jato_total",
+      "name": "Jato Total",
+      "keywords": ["jato total", "total", "fosco total", "jateado total"],
+      "preco": "R$ 65,00/m²",
+      "regras_de_negocio": "Preço base por metro quadrado.",
+      "restricoes": "Somente jateamento."
+    },
+    {
+      "id": "filete_simples",
+      "name": "Filete Simples (Ref. 01)",
+      "keywords": ["filete simples", "ref 01", "referência 01", "ref. 1", "ref 1"],
+      "preco": "R$ 96,00/m²",
+      "regras_de_negocio": "Preço base por metro quadrado.",
+      "restricoes": "Consulte o catálogo visual Jateart."
+    },
+    {
+      "id": "filete_grego_simples_duplo",
+      "name": "Filete Grego Simples ou Filete Duplo (Refs. 02 a 18)",
+      "keywords": ["filete grego simples", "filete duplo", "ref 02", "ref 18", "referência 02", "referência 18", "ref 05", "ref 10"],
+      "preco": "R$ 106,00/m²",
+      "regras_de_negocio": "Preço base por m² (Refs 02 a 18).",
+      "restricoes": "Consulte o catálogo visual Jateart."
+    },
+    {
+      "id": "filete_grego",
+      "name": "Filete Grego (Refs. 19 a 102)",
+      "keywords": ["filete grego", "ref 19", "ref 102", "referência 50"],
+      "preco": "R$ 116,00/m²",
+      "regras_de_negocio": "Preço base por m² (Refs 19 a 102).",
+      "restricoes": "Consulte o catálogo visual Jateart."
+    },
+    {
+      "id": "filete_grego_desenho",
+      "name": "Filete Grego com Desenho (Refs. 103 a 231)",
+      "keywords": ["filete grego com desenho", "ref 103", "ref 231", "referência 200"],
+      "preco": "R$ 116,00/m²",
+      "regras_de_negocio": "Preço base por m² (Refs 103 a 231).",
+      "restricoes": "Consulte o catálogo visual Jateart."
+    },
+    {
+      "id": "persianas",
+      "name": "Persianas Jateadas (3x3, 3x1, 2x1, 1x1, 0.5x0.5)",
+      "keywords": ["persiana", "persianas", "3x3", "3x1", "2x1", "1x1", "0,5x0,5", "0.5x0.5"],
+      "preco": "3x3: R$ 106,00/m² | 3x1 ou 2x1: R$ 116,00/m² | 1x1: R$ 125,00/m² | 0,5x0,5: R$ 135,00/m²",
+      "regras_de_negocio": "Preço base por m² de acordo com a medida da persiana jateada.",
+      "restricoes": "Especificar qual medida no momento do pedido."
+    },
+    {
+      "id": "logotipos_textos",
+      "name": "Logotipos ou Textos",
+      "keywords": ["logotipo", "logo", "texto", "escrita", "nome da empresa"],
+      "preco": "R$ 175,00/m². Arte final (se necessário): R$ 40,00/m².",
+      "regras_de_negocio": "Arte final é cobrada caso o cliente não envie vetorizado.",
+      "restricoes": "Depende de validação e aprovação do design."
+    },
+    {
+      "id": "artisticos",
+      "name": "Jateamento Artístico",
+      "keywords": ["artístico", "artísticos", "chapado", "sombreamento", "floral", "paisagem", "pessoas", "aves", "animais", "santa ceia", "brasão"],
+      "preco": "Chapado: R$ 170,00/m² | Floral: R$ 198,00/m² | Paisagem/animais/pessoas: R$ 250,00/m² | Santa Ceia: R$ 480,00/m². Arte final (brasão/artístico): R$ 60,00/m².",
+      "regras_de_negocio": "Preço variável conforme o detalhamento e técnica.",
+      "restricoes": "Consultar catálogo de Artísticos."
+    },
+    {
+      "id": "bizote_artistico",
+      "name": "Bizotê Artístico",
+      "keywords": ["bizote artístico", "bisote", "bisotê", "bizotado artístico"],
+      "preco": "R$ 25,00/ml (metro linear).",
+      "regras_de_negocio": "O único serviço de lapidação contado rigorosamente por metro linear.",
+      "restricoes": "Atente-se: ML não é M²."
+    },
+    {
+      "id": "baixo_relevo",
+      "name": "Gravações em Baixo Relevo",
+      "keywords": ["baixo relevo", "relevo", "profundo"],
+      "preco": "R$ 780,00/m².",
+      "regras_de_negocio": "Aplicável a logotipos, textos e desenhos fundos na chapa.",
+      "restricoes": "Precisa de vidros com espessura mais reforçada, dependendo da profundidade."
+    },
+    {
+      "id": "jateamento_foto",
+      "name": "Jateamento de Foto (Rostos e Retratos)",
+      "keywords": ["foto", "fotografia", "retrato", "rosto"],
+      "preco": "R$ 480,00/m² + valor Arte Final da foto.",
+      "regras_de_negocio": "Possui tamanho e cobrança com metragem MÍNIMA de 0,30 m².",
+      "restricoes": "Exige fotografia em alta definição."
+    },
+    {
+      "id": "brindes_tacas_tabuas",
+      "name": "Gravação em Taças, Copos, Garrafas e Tábuas (Por Unidade)",
+      "keywords": ["taça", "taças", "copo", "copos", "garrafa", "tábua", "churrasco", "brinde", "unidade", "peça"],
+      "preco": "Taças/copos/garrafas: a partir de R$ 21,00/cada. Tábuas de vidro 10mm (fornecidas por nós) a partir de R$ 75,00/peça. Tábuas enviadas pelo cliente a partir de R$ 50,00/peça.",
+      "regras_de_negocio": "Cobrado por PEÇA (unidade), não confunda com metro quadrado.",
+      "restricoes": "Possibilidade de variações conforme formato da taça."
+    },
+    {
+      "id": "pintura",
+      "name": "Pintura em Vidro (Sayerlack)",
+      "keywords": ["pintura", "pintado", "cor", "branco", "preto", "colorido", "metálico", "sayerlack", "sayersystem", "tinta"],
+      "preco": "Branco/Preto: R$ 175,00/m² | Branco blackout ou intermediárias(bege/cinza/marrom): R$ 198,00/m² | Cores fortes (amarelo/vermelho/azul): R$ 205,00/m² | Metálicas (dourado/cobre): R$ 250,00/m² | Pintura Jateada: R$ 198,00/m² | Pintura Espelho: R$ 330,00/m².",
+      "regras_de_negocio": "Cores são sempre estimativas pela tela celular/computador.",
+      "restricoes": "AVISO EXTREMO: A cor digital é APENAS REFERÊNCIA. Deve ser validada APENAS em cartela física ou amostra."
     }
   ],
   "B2C": [
     {
       "id": "box_vidro",
       "name": "Box de Vidro para Banheiro",
-      "keywords": ["box", "banheiro", "chuveiro", "blindex"],
-      "basePriceInfo": "A partir de R$ 350,00 o metro quadrado (m²).",
-      "rules": "O valor exato depende das medidas, cor do vidro (incolor, fumê, verde) e tipo de acabamento (alumínio padrão ou roldanas aparentes). A instalação está inclusa para a região metropolitana."
+      "keywords": ["box", "banheiro", "chuveiro", "blindex", "roldana"],
+      "preco": "Não fornecemos preço fixo automático.",
+      "regras_de_negocio": "Orçamento dependente de visita técnica e medidas.",
+      "restricoes": "Não passar valor final agressivo. Sustentar valor estético/segurança e focar em agendamento."
     },
     {
       "id": "espelhos",
-      "name": "Espelhos Sob Medida",
-      "keywords": ["espelho", "espelhos", "sala", "quarto", "parede"],
-      "basePriceInfo": "A partir de R$ 280,00 o metro quadrado (m²).",
-      "rules": "Aplica-se a espelhos prata cristais (Cebrace ou Guardian) de 4mm. Acabamento bisotê ou lapidado. Necessário avaliar a parede antes da fixação."
+      "name": "Espelhos Sob Medida e Decorativos",
+      "keywords": ["espelho", "espelhos", "sala", "quarto", "parede", "decorativo", "orgânico", "led"],
+      "preco": "Não fornecemos preço fixo automático.",
+      "regras_de_negocio": "Orçamento dependente de visita técnica e medidas.",
+      "restricoes": "Vender design elegante, harmonia de ambiete. Evitar termos como luxo exagerado ou pechincha."
     },
     {
       "id": "envidracamento",
       "name": "Envidraçamento de Sacadas (Cortina de Vidro)",
       "keywords": ["sacada", "envidraçamento", "cortina de vidro", "varanda", "fechamento"],
-      "basePriceInfo": "A partir de R$ 650,00 o metro quadrado (m²).",
-      "rules": "Utiliza vidro temperado de 8mm ou 10mm com película de segurança (opcional). O prazo de entrega é de cerca de 15 a 20 dias úteis. Requer aprovação ou padronização do condomínio."
+      "preco": "Não fornecemos preço fixo automático.",
+      "regras_de_negocio": "Orçamento dependente de visita técnica e medidas para validação do esquadro do vão e normas.",
+      "restricoes": "Vender nível da roldana e qualidade de rolamento. Instalação robusta."
     }
   ]
 }
