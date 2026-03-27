@@ -10,42 +10,53 @@ export interface CatalogItem {
   rules: string;
 }
 
+export interface CatalogData {
+  B2B: CatalogItem[];
+  B2C: CatalogItem[];
+}
+
 export const ragService = {
   /**
    * Loads the catalog data from catalog.json
    */
-  loadCatalog(): CatalogItem[] {
+  loadCatalog(): CatalogData | null {
     const filePath = path.join(__dirname, '../data/catalog.json');
     if (!fs.existsSync(filePath)) {
       console.warn('Catalog JSON not found at:', filePath);
-      return [];
+      return null;
     }
     const rawData = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(rawData) as CatalogItem[];
+    return JSON.parse(rawData) as CatalogData;
   },
 
   /**
-   * Retrieves relevant product info from the catalog based on the user's message.
-   * This is a lightweight RAG implementation using keyword matching.
+   * Retrieves relevant product info from the catalog based on the user's message and business context.
    */
-  retrieveContext(userMessage: string): string {
-    const catalog = this.loadCatalog();
+  retrieveContext(userMessage: string, contextType: 'B2B' | 'B2C' | 'UNKNOWN'): string {
+    if (contextType === 'UNKNOWN') {
+      return "Aja com base nos seus conhecimentos gerais. O escopo exato do negócio não foi identificado para esta Inbox.";
+    }
+
+    const catalogData = this.loadCatalog();
+    if (!catalogData) return "Catálogo de referências temporariamente indisponível.";
+
+    const catalogArray = catalogData[contextType] || [];
     const normalizedMessage = userMessage.toLowerCase();
     
     // Find all matching items
-    const matchedItems = catalog.filter(item => 
+    const matchedItems = catalogArray.filter(item => 
       item.keywords.some(kw => normalizedMessage.includes(kw.toLowerCase()))
     );
 
     if (matchedItems.length === 0) {
-      return "Nenhum produto em específico identificado nesta mensagem. Responda de forma genérica sobre os serviços de vidraçaria, ou pergunte o que o cliente procura.";
+      return "Nenhum produto em específico identificado nesta mensagem. Responda de forma genérica sobre os serviços de vidraçaria, ou pergunte o que o cliente procura dentro do seu contexto de operação.";
     }
 
-    // Format the matched items into a string context for the AI
+    // Format the matched items into a string context
     const contextFragments = matchedItems.map(item => {
-      return `\nProduto: ${item.name}\nPreço Base: ${item.basePriceInfo}\nRegras: ${item.rules}`;
+      return `\nProduto/Serviço: ${item.name}\nPreço Base: ${item.basePriceInfo}\nRegras: ${item.rules}`;
     });
 
-    return `Informações recuperadas da base de conhecimento (Restrito para uso interno, NÃO invente dados fora deste contexto):\n${contextFragments.join('\n')}`;
+    return `Informações recuperadas da base de conhecimento (Restrito para uso interno no escopo ${contextType}, NÃO invente dados fora deste contexto):\n${contextFragments.join('\n')}`;
   }
 };

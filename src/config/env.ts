@@ -8,6 +8,8 @@ export const env = {
   CHATWOOT_ACCOUNT_ID: process.env.CHATWOOT_ACCOUNT_ID || '1',
   GEMINI_API_KEY: process.env.GEMINI_API_KEY || '',
   GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-3.1-pro-preview',
+  CHATWOOT_INBOX_ID_B2B: parseInt(process.env.CHATWOOT_INBOX_ID_B2B || '0', 10),
+  CHATWOOT_INBOX_ID_B2C: parseInt(process.env.CHATWOOT_INBOX_ID_B2C || '0', 10),
 };
 
 if (!env.CHATWOOT_URL || !env.CHATWOOT_API_TOKEN) {

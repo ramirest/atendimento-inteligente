@@ -2,6 +2,7 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { chatwootService } from '../services/chatwootService';
 import { ragService } from '../services/ragService';
 import { aiService } from '../services/aiService';
+import { env } from '../config/env';
 
 export const webhookController = {
   async handleChatwootEvent(request: FastifyRequest, reply: FastifyReply) {
@@ -17,6 +18,7 @@ export const webhookController = {
     const isPrivate = event.private;
     const content = event.content;
     const conversationId = event.conversation.id;
+    const inboxId = event.inbox?.id;
 
     // RULE 1: Ignore private notes
     if (isPrivate) {
@@ -33,11 +35,10 @@ export const webhookController = {
       return reply.code(200).send({ status: 'ignored', reason: 'Conversation is resolved.' });
     }
 
-    console.log(`Received incoming message from conversation ${conversationId}: ${content}`);
+    console.log(`Received incoming message from conversation ${conversationId} (Inbox: ${inboxId}): ${content}`);
 
     try {
       // Handoff Detection Logic
-      // For instance, if user types "falar com atendente" or "humano"
       const lowerContent = content.toLowerCase();
       if (lowerContent.includes('atendente') || lowerContent.includes('humano')) {
         console.log(`[Handoff] Transferring conversation ${conversationId} to a human agent.`);
@@ -48,9 +49,17 @@ export const webhookController = {
         return reply.code(200).send({ status: 'success', action: 'handoff' });
       }
 
+      // Determine Business Context based on Inbox ID
+      let businessContext: 'B2B' | 'B2C' | 'UNKNOWN' = 'UNKNOWN';
+      if (inboxId === env.CHATWOOT_INBOX_ID_B2B) {
+        businessContext = 'B2B';
+      } else if (inboxId === env.CHATWOOT_INBOX_ID_B2C) {
+        businessContext = 'B2C';
+      }
+
       // AI Integration Logic with RAG and Gemini
-      console.log(`[AI] Retrieving context for conversation ${conversationId}...`);
-      const context = ragService.retrieveContext(content);
+      console.log(`[AI] Retrieving context for conversation ${conversationId} (Context: ${businessContext})...`);
+      const context = ragService.retrieveContext(content, businessContext);
 
       console.log(`[AI] Retrieving history for conversation ${conversationId}...`);
       const historyResponse = await chatwootService.getConversationMessages(conversationId);
@@ -65,7 +74,7 @@ export const webhookController = {
         .join('\n');
 
       console.log(`[AI] Generating response using Gemini for conversation ${conversationId}...`);
-      const aiResponseData = await aiService.generateResponse(content, context, formattedHistory);
+      const aiResponseData = await aiService.generateResponse(content, context, formattedHistory, businessContext);
       
       // Check if Gemini decided to handoff to human
       if (aiResponseData.isHandoff) {
